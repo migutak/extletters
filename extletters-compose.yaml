@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  registry:
+    container_name: extletters
+    image: migutak/extletters:latest
+    restart: always
+    ports:
+    - "4403:443"
+    - "4408:80"
+    volumes:
+      - /opt/certs/ecollect-selfsigned.crt:/etc/ssl/certs/ecollect-selfsigned.crt
+      - /opt/certs/ecollect-selfsigned.key:/etc/ssl/private/ecollect-selfsigned.key
+    networks:
+      - ecol-network
+    
+networks:
+  ecol-network:
+    driver: bridge

@@ -1,19 +1,2 @@
 
-<div class="text-center" role="main" [hidden]="myVar">
-
-  <form class="form-signin" #signinForm="ngForm">
-    <img class="mb-4" src="../assets/images/cooop.jpeg" alt="The Creator" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please enter your National ID</h1>
-    
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" name="pass" id="pass" [(ngModel)]="model.pass"
-    #pass="ngModel" [ngClass]="{ 'is-invalid': pass.invalid }" required autofocus>
-    
-    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()" [disabled]="!signinForm.valid">Login</button>
-    <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>  
-    <p class="mt-5 mb-3 text-muted">© 2020</p>
-  </form>
-
-</div>
-
 <router-outlet></router-outlet>

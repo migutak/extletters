@@ -9,8 +9,12 @@ COPY dist/extletters /usr/share/nginx/html
 
 # expose port 80
 EXPOSE 80
+EXPOSE 443
 
 # run nginx
 CMD ["nginx", "-g", "daemon off;"]
-# docker build -t migutak/extletters:1.0.0 .
-# docker save -o migutak_extletters.tar migutak/extletters:1.0.0
+# docker build -t migutak/extletters .
+# docker push migutak/extletters
+# docker save -o migutak_extletters.tar migutak/extletters
+# docker run -it -d -p 9080:80 --name extletters migutak/extletters
+
