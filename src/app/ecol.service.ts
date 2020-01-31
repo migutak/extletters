@@ -17,4 +17,12 @@ export class EcolService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
+  login(nationid: string, letterid: string) {
+    return this.httpClient.get<any>(environment.api + '/api/extletters/search?nationid=' + nationid + '&letterid=' + letterid);
+  }
+
+  extletters(id: number, body: {}) {
+    return this.httpClient.put<any>(environment.api + '/api/extletters/' + id, body);
+  }
 }

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: 'http://68.183.63.158:8000',
-  demanddownload: 'http://68.183.63.158:3000',
-  filepath: '/root/demands/'
+  api: 'http://172.16.204.71:8000',
+  demanddownload: 'http://172.16.204.71:3100',
+  filepath: '/home/ecollectadmin/demandletters/'
 };

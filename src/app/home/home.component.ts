@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   src: string;
   myVar = false;
   letterid: string;
+  body: any = {};
+  id: any;
 
   constructor(private http: HttpClient,
     private activatedRoute: ActivatedRoute,
@@ -32,19 +34,39 @@ export class HomeComponent implements OnInit {
 
   login() {
     this.error = '';
-    if(this.model.pass === '123456') {
-      this.downloadFile(this.src,'co-op demand letter')
-    } else {
-      this.error = 'Wrong nation id';
-    }
+    this.ecolService.login(this.model.pass, this.letterid).subscribe(data => {
+      if (data && data[0]) {
+        this.downloadFile(this.src,'co-op demand letter')
+        // update as downloaded
+        this.id = data[0].ID;
+        this.body = {
+          accnumber: data[0].ACCNUMBER,
+          custnumber: data[0].CUSTNUMBER,
+          nationid: data[0].NATIONID,
+          letterid: data[0].LETTERID,
+          phonenumber: data[0].PHONENUMBER,
+          owner: data[0].OWNER,
+          postdate: data[0].POSTDATE,
+          isdownloaded: 'y',
+          downloaddate: new Date()
+        }
+
+      } else {
+        this.error = 'Incorrect login details';
+      }
+    })
   }
 
   downloadFile(filepath, filename) {
     this.ecolService.demanddownload(filepath).subscribe(data => {
       saveAs(data, filename);
       alert('Download complete!')
+      this.ecolService.extletters(this.id, this.body).subscribe(resp => {
+        console.log(resp)
+      })
     }, error => {
-      console.log(error.error);
+      console.log(error);
+      this.error = 'No letter found';
     });
   } 
 
